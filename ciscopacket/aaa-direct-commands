@@ -1,0 +1,62 @@
+
+------ROUTER 1--------
+conf t
+router rip
+network 192.168.1.0
+network 10.1.1.0
+exit
+
+------ROUTER 2--------
+conf t
+router rip
+network 10.1.1.0
+network 192.168.2.0
+network 10.2.2.0
+exit
+
+------ROUTER 3--------
+conf t
+router rip
+network 192.168.3.0
+network 10.2.2.0
+exit
+
+
+------ROUTER 1--------
+username kaanchi secret ty22
+aaa new-model
+aaa authentication login default local
+line console 0
+login authentication default
+
+
+------ROUTER 1--------
+ip domain-name security.com
+crypto key generate rsa
+
+
+aaa authentication login SSH-LOGIN local
+line vty 0 4
+login authentication SSH-LOGIN
+transport input ssh
+exit
+
+
+------ROUTER 2--------
+username admin secret admin123
+tacacs-server host 192.168.2.2
+tacacs-server key pwdr2
+aaa new-model
+aaa authentication login default group tacacs+ local
+line console 0
+login authentication default
+
+
+------ROUTER 3--------
+username admin1 secret admin321
+radius-server host 192.168.3.2
+radius-server key pwdr3
+aaa new-model
+aaa authentication login default group radius local
+line console 0
+login authentication default

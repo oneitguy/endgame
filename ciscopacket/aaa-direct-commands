@@ -23,6 +23,7 @@ exit
 
 
 ------ROUTER 1--------
+conf t
 username kaanchi secret ty22
 aaa new-model
 aaa authentication login default local
@@ -31,10 +32,11 @@ login authentication default
 
 
 ------ROUTER 1--------
+conf t
 ip domain-name security.com
 crypto key generate rsa
 
-
+conf t
 aaa authentication login SSH-LOGIN local
 line vty 0 4
 login authentication SSH-LOGIN
@@ -43,6 +45,7 @@ exit
 
 
 ------ROUTER 2--------
+conf t
 username admin secret admin123
 tacacs-server host 192.168.2.2
 tacacs-server key pwdr2
@@ -53,6 +56,7 @@ login authentication default
 
 
 ------ROUTER 3--------
+conf t
 username admin1 secret admin321
 radius-server host 192.168.3.2
 radius-server key pwdr3
